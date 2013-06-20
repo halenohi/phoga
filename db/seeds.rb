@@ -30,3 +30,14 @@ if Phoga::Tag.count == 0
     puts article.taggings.inspect
   end
 end
+
+if Phoga::Comment.count == 0
+  article = Phoga::Article.find(1)
+  comment = article.comments.create({
+    author_name: 'sample name',
+    author_email: 'sample@example.com',
+    body: 'sample comment body'
+  })
+  comment.publish!
+  puts comment.inspect
+end

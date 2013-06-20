@@ -16,5 +16,9 @@ module Phoga
 
     has_many :tags,
       through: :taggings
+
+    has_many :comments,
+      as: :commentable,
+      dependent: :destroy
   end
 end
