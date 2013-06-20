@@ -6,7 +6,13 @@ Phoga::Engine.routes.draw do
 
     devise_for :users, {
       class_name: "Phoga::User",
-      module: :devise
+      module: :devise,
+      controllers: {
+        registrations: 'phoga/users/registrations',
+        confirmations: 'phoga/users/confirmations',
+        sessions:      'phoga/users/sessions',
+        passwords:     'phoga/users/passwords'
+      }
     }
   end
 end
