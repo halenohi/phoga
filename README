@@ -1,0 +1,24 @@
+Phoga
+
+Usage
+
+1. install gem
+----------------------------------
+$ gem 'phoga', git: 'git@bitbucket.org:kozo002/phoga.git'
+$ bundle install
+
+
+2. add configuration
+----------------------------------
+db/seeds.rb
+  Phoga::Engine.load_seed
+
+config/routes.rb
+  mount Phoga::Engine, at: '/admin'
+
+
+3. exec migration & seed
+----------------------------------
+$ bundle exec rake phoga:install:migrations
+$ bundle exec rake db:migrate
+$ bundle exec rake db:seed
