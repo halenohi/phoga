@@ -2,24 +2,24 @@
 class Phoga::ArticlesController < Phoga::ApplicationController
   # GET /admin/articles
   def index
-    @articles = Article.all
+    @articles = Phoga::Article.scoped.page(params[:page]).per(30)
   end
 
   # GET /admin/articles/:id
   def show
-    @article = Article.find(params[:id])
+    @article = Phoga::Article.find(params[:id])
   end
 
   # GET /admin/articles/new
   def new
-    @article = Article.new
+    @article = Phoga::Article.new
   end
 
   # POST /admin/articles
   def create
-    @article = Article.new(params[:article])
+    @article = Phoga::Article.new(params[:article])
     if @article.save
-      redirect_to admin_article_path(@article), notice: ''
+      redirect_to @article, notice: ''
     else
       flash[:alert] = ''
       render :new
@@ -28,14 +28,14 @@ class Phoga::ArticlesController < Phoga::ApplicationController
 
   # GET /admin/article/:id/edit
   def edit
-    @article = Article.find(params[:id])
+    @article = Phoga::Article.find(params[:id])
   end
 
   # PUT /admin/articles/:id
   def update
-    @article = Article.find(params[:id])
+    @article = Phoga::Article.find(params[:id])
     if @article.update_attributes(params[:article])
-      redirect_to admin_article_path(@article), notice: ''
+      redirect_to @article, notice: ''
     else
       flash[:alert] = ''
       render :edit
@@ -44,8 +44,8 @@ class Phoga::ArticlesController < Phoga::ApplicationController
 
   # DELETE /admin/articles/:id
   def destroy
-    @article = Article.find(params[:id])
+    @article = Phoga::Article.find(params[:id])
     @article.destroy
-    redirect_to admin_articles_path, notice: ''
+    redirect_to articles_path, notice: ''
   end
 end
