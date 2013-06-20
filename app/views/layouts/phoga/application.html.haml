@@ -1,16 +1,16 @@
 !!! 5
-%html{ lang: "ja" }
+%html{ lang: 'ja' }
   %head
-    %meta{ charset: "utf-8" }
+    %meta{ charset: 'utf-8' }
     %title Phoga
-    = stylesheet_link_tag "phoga/application", media: "screen"
-    = javascript_include_tag "phoga/application"
+    = stylesheet_link_tag 'phoga/application', media: 'screen'
+    = javascript_include_tag 'phoga/application'
     = csrf_meta_tags
   %body
     = render 'layouts/phoga/navbar'
     .container-fluid
       .row-fluid
         = render 'layouts/phoga/sidebar'
-        .span9
+        .span10
           = yield
       = render 'layouts/phoga/footer'

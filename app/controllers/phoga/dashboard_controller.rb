@@ -1,5 +1,5 @@
 # coding: utf-8
-class Phoga::DashboardController < PhogaCore::ApplicationController
+class Phoga::DashboardController < Phoga::ApplicationController
   # GET /
   def show; end
 end

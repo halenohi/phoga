@@ -1,3 +1,3 @@
 class Phoga::ApplicationController < ActionController::Base
-  layout 'phoga/admin'
+  layout 'phoga/application'
 end

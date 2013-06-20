@@ -1,5 +1,5 @@
 # coding: utf-8
-class Phoga::ArticlesController < PhogaCore::ApplicationController
+class Phoga::ArticlesController < Phoga::ApplicationController
   # GET /admin/articles
   def index
     @articles = Article.all

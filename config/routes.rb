@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+Phoga::Engine.routes.draw do
   constraints scheme: Rails.env.production? ? 'https' : 'http' do
     root to: 'dashboard#show'
     resources :articles
