@@ -1,0 +1,15 @@
+.navbar.navbar-inverse.navbar-fixed-top
+  .navbar-inner
+    .container-fluid
+      %button{ type: "button", class: "btn btn-navbar", data: { toggle: "collapse", target: ".nav-collapse" } }
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to 'Project name', '#', { class: 'brand' }
+      .nav-collapse.collapse
+        %p.navbar-text.pull-right
+          Logged in as
+          = link_to 'Username', '#', { class: 'navbar-link' }
+        %ul.nav
+          %li.active= link_to 'Help', '#'
+          %li= link_to 'Home', '#'
