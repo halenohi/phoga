@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130620031806) do
+ActiveRecord::Schema.define(:version => 20130620073015) do
 
   create_table "phoga_articles", :force => true do |t|
     t.string   "title"
@@ -21,6 +21,24 @@ ActiveRecord::Schema.define(:version => 20130620031806) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
+
+  create_table "phoga_taggings", :force => true do |t|
+    t.string   "taggable_type"
+    t.integer  "taggable_id"
+    t.integer  "tag_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "phoga_taggings", ["taggable_type", "taggable_id", "tag_id"], :name => "taggable_index"
+
+  create_table "phoga_tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "phoga_tags", ["name"], :name => "index_phoga_tags_on_name", :unique => true
 
   create_table "phoga_users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

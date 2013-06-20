@@ -18,3 +18,15 @@ if Phoga::Article.count == 0
   article.save!
   puts article.inspect
 end
+
+if Phoga::Tag.count == 0
+  article = Phoga::Article.find(1)
+  (1..3).each do |n|
+    tag = Phoga::Tag.create({
+      name: "sample tag #{ n }"
+    })
+    puts tag.inspect
+    article.taggings.create({ tag_id: tag.id })
+    puts article.taggings.inspect
+  end
+end
