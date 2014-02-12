@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130620081623) do
+ActiveRecord::Schema.define(:version => 20130620093407) do
 
   create_table "phoga_articles", :force => true do |t|
     t.string   "title"
@@ -21,6 +21,29 @@ ActiveRecord::Schema.define(:version => 20130620081623) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
+
+  create_table "phoga_categories", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.integer  "parent_id"
+    t.integer  "position"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "phoga_categories", ["name"], :name => "index_phoga_categories_on_name"
+  add_index "phoga_categories", ["parent_id"], :name => "index_phoga_categories_on_parent_id"
+  add_index "phoga_categories", ["slug"], :name => "index_phoga_categories_on_slug"
+
+  create_table "phoga_categorizations", :force => true do |t|
+    t.string   "categorizable_type"
+    t.integer  "categorizable_id"
+    t.integer  "category_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "phoga_categorizations", ["categorizable_type", "categorizable_id", "category_id"], :name => "categorizable_index"
 
   create_table "phoga_comments", :force => true do |t|
     t.string   "commentable_type"
@@ -35,6 +58,26 @@ ActiveRecord::Schema.define(:version => 20130620081623) do
   end
 
   add_index "phoga_comments", ["commentable_type", "commentable_id"], :name => "commentable_index"
+
+  create_table "phoga_custom_field_assignments", :force => true do |t|
+    t.string   "assignable_type"
+    t.integer  "assignable_id"
+    t.integer  "custom_field_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "phoga_custom_field_assignments", ["assignable_type", "assignable_id", "custom_field_id"], :name => "assignable_index"
+
+  create_table "phoga_custom_fields", :force => true do |t|
+    t.string   "name"
+    t.text     "content"
+    t.string   "image"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "phoga_custom_fields", ["name"], :name => "index_phoga_custom_fields_on_name"
 
   create_table "phoga_taggings", :force => true do |t|
     t.string   "taggable_type"

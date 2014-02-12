@@ -41,3 +41,32 @@ if Phoga::Comment.count == 0
   comment.publish!
   puts comment.inspect
 end
+
+if Phoga::Category.count == 0
+  article = Phoga::Article.find(1)
+  category = Phoga::Category.create({
+    name: 'sample category',
+    slug: 'sample-category'
+  })
+  puts category.inspect
+  child_category = Phoga::Category.create({
+    name: 'sample child category',
+    slug: 'sample-child-category',
+    parent_id: category.id
+  })
+  puts child_category.inspect
+  categorization = article.categorizations.create({ category_id: child_category.id })
+  puts categorization.inspect
+end
+
+
+if Phoga::CustomField.count == 0
+  article = Phoga::Article.find(1)
+  custom_field = Phoga::CustomField.create({
+    name: 'sample custom field',
+    content: 'sample custom field content'
+  })
+  puts custom_field.inspect
+  article.custom_field_assignments.create({ custom_field_id: custom_field.id })
+  puts article.custom_field_assignments.inspect
+end

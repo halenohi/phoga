@@ -1,9 +1,13 @@
 require 'haml'
 require 'bootstrap-sass'
-require 'backbone-on-rails'
-require 'devise'
-require 'kaminari'
 require 'jquery-rails'
+require 'backbone-on-rails'
+
+require 'devise'
+require 'cancan'
+
+require 'kaminari'
+require 'carrierwave'
 
 module Phoga
   class Engine < ::Rails::Engine

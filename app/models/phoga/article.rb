@@ -20,5 +20,19 @@ module Phoga
     has_many :comments,
       as: :commentable,
       dependent: :destroy
+
+    has_many :categorizations,
+      as: :categorizable,
+      dependent: :destroy
+
+    has_many :categories,
+      through: :categorizations
+
+    has_many :custom_field_assignments,
+      as: :assignable,
+      dependent: :destroy
+
+    has_many :custom_fields,
+      through: :custom_field_assignments
   end
 end
