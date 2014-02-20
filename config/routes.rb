@@ -4,14 +4,14 @@ Phoga::Engine.routes.draw do
 
     resources :articles
 
-    devise_for :users, {
-      class_name: "Phoga::User",
-      module: :devise,
+    devise_for :admins, {
+      class_name: "Phoga::Admin",
+      path: '/',
       controllers: {
-        registrations: 'phoga/users/registrations',
-        confirmations: 'phoga/users/confirmations',
-        sessions:      'phoga/users/sessions',
-        passwords:     'phoga/users/passwords'
+        registrations: 'phoga/admins/registrations',
+        confirmations: 'phoga/admins/confirmations',
+        sessions:      'phoga/admins/sessions',
+        passwords:     'phoga/admins/passwords'
       }
     }
   end

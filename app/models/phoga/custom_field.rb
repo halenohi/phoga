@@ -1,7 +1,5 @@
 module Phoga
   class CustomField < ActiveRecord::Base
-    attr_accessible :content, :image, :name
-
     has_many :custom_field_assignments,
       dependent: :destroy
 

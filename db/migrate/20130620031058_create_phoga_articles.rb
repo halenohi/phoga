@@ -4,7 +4,7 @@ class CreatePhogaArticles < ActiveRecord::Migration
       t.string :title
       t.text :body
       t.datetime :published_at
-      t.integer :user_id
+      t.integer :admin_id
 
       t.timestamps
     end

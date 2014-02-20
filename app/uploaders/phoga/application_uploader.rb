@@ -4,8 +4,7 @@ require 'carrierwave/processing/mime_types'
 class Phoga::ApplicationUploader < CarrierWave::Uploader::Base
   include CarrierWave::MimeTypes
   include CarrierWave::MiniMagick
-  include Sprockets::Helpers::RailsHelper
-  include Sprockets::Helpers::IsolatedHelper
+  include Sprockets::Rails::Helper
 
   storage Rails.env.test? || Rails.env.development? ? :file : :fog
 

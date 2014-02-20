@@ -1,4 +1,3 @@
-# coding: utf-8
 class Phoga::ArticlesController < Phoga::ApplicationController
   # GET /admin/articles
   def index

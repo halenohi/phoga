@@ -1,3 +1,4 @@
-Dummy::Application.routes.draw do
-  mount Phoga::Engine, at: '/admin'
+Rails.application.routes.draw do
+
+  mount Phoga::Engine => "/admin"
 end

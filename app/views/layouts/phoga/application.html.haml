@@ -7,10 +7,5 @@
     = javascript_include_tag 'phoga/application'
     = csrf_meta_tags
   %body
-    = render 'layouts/phoga/navbar'
-    .container-fluid
-      .row-fluid
-        = render 'layouts/phoga/sidebar'
-        .span10
-          = yield
-      = render 'layouts/phoga/footer'
+    = link_to 'ログアウト', destroy_admin_session_path, { data: { method: 'delete' } }
+    = yield

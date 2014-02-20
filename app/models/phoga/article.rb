@@ -1,14 +1,10 @@
 module Phoga
   class Article < ActiveRecord::Base
-    attr_accessible :body, :title,
-                    :published_at,
-                    :user_id
-
-    validates :user_id,
+    validates :admin_id,
       presence: true
 
-    belongs_to :user,
-      class_name: 'Phoga::User'
+    belongs_to :admin,
+      class_name: 'Phoga::Admin'
 
     has_many :taggings,
       as: :taggable,

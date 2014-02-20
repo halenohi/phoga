@@ -1,7 +1,5 @@
 module Phoga
   class Category < ActiveRecord::Base
-    attr_accessible :name, :parent_id, :position, :slug
-
     has_many :categorizations,
       dependent: :destroy
 

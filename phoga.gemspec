@@ -16,16 +16,16 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir['spec/**/*']
 
-  s.add_dependency "rails", "~> 3.2.13"
-  s.add_dependency "coffee-rails", "~> 3.2.1"
-  s.add_dependency "sass-rails", "~> 3.2.3"
-  s.add_dependency "haml-rails"
-  s.add_dependency "uglifier", ">= 1.0.3"
+  s.add_dependency "rails", "~> 4.0.2"
+  s.add_dependency "coffee-rails", "~> 4.0.1"
+  s.add_dependency "sass-rails", "~> 4.0.1"
+  s.add_dependency "haml-rails", "~> 0.5.3"
+  s.add_dependency "uglifier", "~> 2.4.0"
 
-  s.add_dependency "jquery-rails"
-  s.add_dependency "bootstrap-sass"
-  s.add_dependency "font-awesome-sass-rails"
-  s.add_dependency "backbone-on-rails"
+  s.add_dependency "jquery-rails", "~> 3.1.0"
+  s.add_dependency "bootstrap-sass", "~> 3.1.0.2"
+  s.add_dependency "font-awesome-sass-rails", "~> 3.0.2.2"
+  s.add_dependency "backbone-on-rails", "~> 1.1.0.0"
 
   s.add_dependency "mini_magick"
   s.add_dependency "carrierwave"
@@ -45,6 +45,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency "factory_girl_rails"
   s.add_development_dependency "capybara"
   s.add_development_dependency 'tapp'
-  s.add_development_dependency 'better_errors'
-  s.add_development_dependency 'mailcatcher'
 end
