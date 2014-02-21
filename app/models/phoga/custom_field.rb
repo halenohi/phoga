@@ -1,12 +1,10 @@
 module Phoga
   class CustomField < ActiveRecord::Base
-    has_many :custom_field_assignments,
-      dependent: :destroy
+    belongs_to :article,
+      class_name: 'Phoga::Article'
 
-    has_many :assigned_articles,
-      through: :custom_field_assignments,
-      source: :article,
-      conditions: "phoga_custom_field_assignments.assignable_type = 'Phoga::Article'"
+    validates :name,
+      presence: true
 
     mount_uploader :image, Phoga::ImageUploader
   end
