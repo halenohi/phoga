@@ -1,10 +1,19 @@
-.container__header {
+.container-inner {
   padding: 5px;
+}
+
+.container__header {
+  @extend .container-inner;
   background-color: #eee;
 }
 
 .container__content {
-  padding: 5px;
+  @extend .container-inner;
+}
+
+.content__footer {
+  @extend .container-inner;
+  background-color: #bbb;
 }
 
 footer.global {
