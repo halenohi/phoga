@@ -51,7 +51,8 @@ class Phoga::ArticlesController < Phoga::ApplicationController
   private
     def article_params
       params.require(:article)
-        .permit(:title, :body, :admin_id)
+        .permit(:title, :body, :admin_id,
+                categorizations_attributes: [ :category_id ])
         .merge({ admin_id: current_admin.id })
     end
 end

@@ -5,7 +5,15 @@ describe Phoga::ArticlesController do
   prepare_admin
 
   let!(:article) { FactoryGirl.create(:article) }
-  let(:article_attr) { FactoryGirl.attributes_for(:article) }
+  let(:article_attr) {
+    categorizations_attr = {
+      categorizations_attributes: [
+        FactoryGirl.build(:categorization_for_attr).attributes,
+        FactoryGirl.build(:categorization_for_attr).attributes
+      ]
+    }
+    FactoryGirl.attributes_for(:article).merge(categorizations_attr)
+  }
 
   describe 'GET #index' do
     context 'ログイン管理者の場合' do
@@ -71,9 +79,14 @@ describe Phoga::ArticlesController do
         article_attr.merge!({ admin_id: admin.id })
       end
 
-      it 'Artistの件数が1つ増えること' do
+      it 'Phoga::Articleの件数が1つ増えること' do
         expect{ post :create, article: article_attr }.
           to change(Phoga::Article, :count).by(1)
+      end
+
+      it 'Phoga::Categorizationも同時に保存されること' do
+        expect{ post :create, article: article_attr }.
+          to change(Phoga::Categorization, :count).by(2)
       end
 
       it 'Article作成後に個別ページにリダイレクトされること' do

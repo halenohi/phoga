@@ -8,27 +8,35 @@ module Phoga
 
     has_many :taggings,
       as: :taggable,
-      dependent: :destroy
+      dependent: :destroy,
+      class_name: 'Phoga::Tagging'
 
     has_many :tags,
-      through: :taggings
+      through: :taggings,
+      class_name: 'Phoga::Tag'
 
     has_many :comments,
       as: :commentable,
-      dependent: :destroy
+      dependent: :destroy,
+      class_name: 'Phoga::Comment'
 
     has_many :categorizations,
       as: :categorizable,
-      dependent: :destroy
+      dependent: :destroy,
+      class_name: 'Phoga::Categorization'
+    accepts_nested_attributes_for :categorizations
 
     has_many :categories,
-      through: :categorizations
+      through: :categorizations,
+      class_name: 'Phoga::Category'
 
     has_many :custom_field_assignments,
       as: :assignable,
-      dependent: :destroy
+      dependent: :destroy,
+      class_name: 'Phoga::CustomFieldAssignment'
 
     has_many :custom_fields,
-      through: :custom_field_assignments
+      through: :custom_field_assignments,
+      class_name: 'Phoga::CustomField'
   end
 end
