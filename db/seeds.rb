@@ -12,7 +12,7 @@ end
 if Phoga::Article.count == 0
   article = Phoga::Article.new({
     title: 'Sample Title',
-    body: 'sample article body...',
+    content: 'sample article body...',
     admin_id: Phoga::Admin.count != 0 ? 1 : nil
   })
   article.save!

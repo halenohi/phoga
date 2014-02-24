@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :article, class: 'Phoga::Article' do
     title 'Sample Title'
-    body 'Sample Body'
+    content 'Sample Content'
     admin { FactoryGirl.create(:saved_admin) }
 
     after(:build) do |article|

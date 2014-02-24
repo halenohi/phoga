@@ -4,11 +4,6 @@ class Phoga::ArticlesController < Phoga::ApplicationController
     @articles = Phoga::Article.page(params[:page]).per(30)
   end
 
-  # GET /admin/articles/:id
-  def show
-    @article = Phoga::Article.find(params[:id])
-  end
-
   # GET /admin/articles/new
   def new
     @article = Phoga::Article.new
@@ -18,7 +13,7 @@ class Phoga::ArticlesController < Phoga::ApplicationController
   def create
     @article = Phoga::Article.new(article_params)
     if @article.save
-      redirect_to @article, notice: ''
+      redirect_to edit_article_path(@article), notice: ''
     else
       flash[:alert] = ''
       render :new
@@ -34,7 +29,7 @@ class Phoga::ArticlesController < Phoga::ApplicationController
   def update
     @article = Phoga::Article.find(params[:id])
     if @article.update_attributes(article_params)
-      redirect_to @article, notice: ''
+      redirect_to edit_article_path(@article), notice: ''
     else
       flash[:alert] = ''
       render :edit

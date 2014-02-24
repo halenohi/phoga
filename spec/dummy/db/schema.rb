@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140221091724) do
+ActiveRecord::Schema.define(version: 20140221094920) do
 
   create_table "phoga_admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20140221091724) do
 
   create_table "phoga_articles", force: true do |t|
     t.string   "title"
-    t.text     "body"
+    t.text     "content"
     t.datetime "published_at"
     t.integer  "admin_id"
     t.datetime "created_at"
