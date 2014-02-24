@@ -1,0 +1,26 @@
+.content__footer {
+  margin: 0;
+  padding: 0;
+  background-color: #3f495b;
+}
+
+.button__tag {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  a:hover {
+    background-color: #4a5467;
+  }
+}
+
+.button__publish {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  background-color: #3f495b;
+  a:hover {
+    background-color: #4a5467;
+  }
+}
