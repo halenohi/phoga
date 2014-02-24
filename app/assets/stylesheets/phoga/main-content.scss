@@ -1,12 +1,24 @@
+html,body {
+  width: 100%;
+}
+
 body {
   background-color: #eee;
 }
 
 .wrapper {
+  position: relative;
 }
 
 .navigation {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 150px;
+  &.navigation-expanded {
+    display: block;
+  }
 }
 
 .navbar {
@@ -20,7 +32,12 @@ body {
 }
 
 .main-container {
-  width: 100%;
+  width: auto;
+  &.expanded-navigation {
+    position: relative;
+    top: 0;
+    left: 150;
+  }
 }
 
 .container-inner {
@@ -66,17 +83,16 @@ body {
   background-color: #222;
 }
 
-footer.global {
-  padding: 10px 0;
-  background-color: #eee;
-}
 
 //Tablet
 @media (min-width: 768px) {
   .navigation {
-    width: 150px;
+    display:block;
   }
   .main-container {
-    width: 80%;
+    margin-left: 150px;
+    &.expanded-navigation {
+      position: static;
+    }
   }
 }
