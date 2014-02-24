@@ -1,5 +1,5 @@
-.wrapper.clearfix
-  .navigation.pull-left
+.wrapper
+  .navigation
     %nav.navbar.navbar-inverse
       .navbar-brand Phoga
       %ul.nav
@@ -13,7 +13,7 @@
           %a{ 'data-url' => '#' } コメント
         %li
           %a{ 'data-url' => '#' } 管理者
-  .main-container.pull-left
+  .main-container
     .container__header.clearfix
       .pull-left
         %h4 現在のページ
@@ -31,5 +31,3 @@
         %button{ type: 'button' , class: 'btn btn-default' } タグ追加
       .content__footer--publish.pull-right
         %button{ type: 'button' , class: 'btn btn-default' } 公開
-    %footer.global.row
-      .text-center (c)&nbsp;All&nbsp;Right&nbsp;Reserved.
