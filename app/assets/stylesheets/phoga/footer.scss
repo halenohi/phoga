@@ -1,26 +1,30 @@
 .content__footer {
   margin: 0;
   padding: 0;
-  background-color: #3f495b;
+  background-color: #fff;
 }
 
 .button__tag {
+  display: block;
   width: 60px;
   height: 60px;
+  color: #ddd;
   text-align: center;
   line-height: 60px;
-  a:hover {
-    background-color: #4a5467;
+  &:hover {
+    background-color: #ddd;
   }
 }
 
 .button__publish {
+  display: block;
   width: 60px;
   height: 60px;
+  color: #fff;
   text-align: center;
   line-height: 60px;
-  background-color: #3f495b;
-  a:hover {
-    background-color: #4a5467;
+  background-color: #cfe9e9;
+  &:hover {
+    background-color: #ddd;
   }
 }

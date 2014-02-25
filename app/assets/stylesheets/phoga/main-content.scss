@@ -4,7 +4,7 @@ html,body {
 }
 
 body {
-  background-color: #222;
+  background-color: #111;
 }
 
 .wrapper {
@@ -12,14 +12,28 @@ body {
   height: 100%;
 }
 
+.text-effect {
+  font-family: 'Bubbler One', sans-serif;
+  display: block;
+  color: #fff;
+  text-shadow: 0 3px 6px #000, 0px -1px 1px #fff;
+  font-weight: bold;
+  letter-spacing: 0.2em;
+  &:hover {
+    color: #fff;
+    text-shadow: 0 2px 6px #ccc, 0px 0px 3px #aaa;
+    background-color: #333 !important;
+  }
+}
+
 .navigation {
   display: none;
   position: absolute;
   top: 0;
   left: 0;
-  width: 150px;
+  width: 180px;
   height: 100%;
-  background-color: #323739;
+  background-color: #222;
   &.navigation--expanded {
     display: block;
     width: 150px;
@@ -39,40 +53,31 @@ body {
   height: 60px;
 }
 
-.nav>li {
-  a:hover{ 
-    background-color: #1c2027;
-  }
-}
-
 .main-container {
   width: auto;
   height: 100%;
-  background-color: #202630;
+  background-color: #eee;
   &.expanded-navigation {
     position: relative;
     top: 0;
-    left: 150px;
+    left: 180px;
   }
 }
 
 .icon-bar {
-  background-color: #fff;
-}
-
-.container-inner {
-  padding: 5px;
+  background-color: #999;
 }
 
 .container__header {
-  @extend .container-inner;
-  color: #fff;
+  padding: 5px 20px;
+  color: #999;
+  background-color: #fff;
 }
 
 .container__header--current {
   float: left;
-  width: auto;
-  line-height: 30px;
+  margin: 0;
+  line-height: 50px;
 }
 
 .admin-nav {
@@ -90,10 +95,17 @@ body {
 .container__content {
   margin: 0;
   padding: 20px;
-  background-color: #eee;
+}
+
+.entry-title {
+  padding: 10px;
+  width: 100%;
+  height: 50px;
+  background-color: #fff;
 }
 
 .entry-editer {
+  margin: 10px 0;
   padding: 10px;
   width: 100%;
   height: 50px;
@@ -115,7 +127,7 @@ body {
     display:block;
   }
   .main-container {
-    margin-left: 150px;
+    margin-left: 180px;
     &.expanded-navigation {
       position: static;
     }
