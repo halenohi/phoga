@@ -5,6 +5,8 @@
 namespace :phoga do
   task :install do
     %w(
+      phoga:add_config_routes
+      phoga:add_db_seeds
       phoga:install:migrations
       db:migrate
       db:seed
