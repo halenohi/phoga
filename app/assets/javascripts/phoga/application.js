@@ -8,6 +8,7 @@ jQuery(function($) {
 
   $('.expand-navigation-button').on('click', function(e) {
     e.preventDefault();
+    console.log('test')
     if ($main.hasClass('expanded-navigation')) {
       $main.removeClass('expanded-navigation');
     } else {
