@@ -1,4 +1,5 @@
 namespace :phoga do
+  desc 'Phogaをインストールするrakeタスクを一気に実行'
   task :install do
     %w(
       phoga:add_config_routes
@@ -11,6 +12,7 @@ namespace :phoga do
     end
   end
 
+  desc 'マウント対象のアプリケーションのconfig/routes.rbにマウントコードを追加'
   task :add_config_routes do
     mount_code = '  mount Phoga::Engine => "/admin"'
     routes_file = File.open(Rails.root.join('config/routes.rb'), 'r+')
@@ -25,6 +27,7 @@ namespace :phoga do
     end
   end
 
+  desc 'マウント対象のアプリケーションのdb/seeds.rbにseedをロードするコードを追加'
   task :add_db_seeds do
     load_seed_code = "Phoga::Engine.load_seed"
     seed_file = File.open(Rails.root.join('db/seeds.rb'), 'r+')
