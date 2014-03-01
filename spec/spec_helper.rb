@@ -53,3 +53,16 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 end
+
+def prepare_admin
+  include Devise::TestHelpers
+  before do
+    @request.env['devise.mapping'] = Devise.mappings['admin']
+  end
+  let!(:admin) do
+    admin = FactoryGirl.build(:admin)
+    admin.skip_confirmation!
+    admin.save!
+    admin
+  end
+end

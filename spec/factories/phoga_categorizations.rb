@@ -2,8 +2,11 @@
 
 FactoryGirl.define do
   factory :categorization, class: 'Phoga::Categorization' do
-    categorizable_type "MyString"
-    categorizable_id 1
-    category_id 1
+    article
+    category
+  end
+
+  factory :categorization_for_attr, class: 'Phoga::Categorization' do
+    category
   end
 end

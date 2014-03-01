@@ -2,25 +2,26 @@
 require 'spec_helper'
 
 describe Phoga::ArticlesController do
-  include Devise::TestHelpers
-
-  let!(:user) do
-    user = FactoryGirl.build(:user)
-    user.skip_confirmation!
-    user.save!
-    user
-  end
+  prepare_admin
 
   let!(:article) { FactoryGirl.create(:article) }
-  let(:article_attr) { FactoryGirl.attributes_for(:article) }
-
-  before(:each) do
-    @request.env['devise.mapping'] = Devise.mappings[:user]
-  end
+  let(:article_attr) {
+    categorizations_attr = {
+      categorizations_attributes: [
+        FactoryGirl.build(:categorization_for_attr).attributes,
+        FactoryGirl.build(:categorization_for_attr).attributes
+      ],
+      custom_fields_attributes: [
+        FactoryGirl.attributes_for(:custom_field),
+        FactoryGirl.attributes_for(:custom_field)
+      ]
+    }
+    FactoryGirl.attributes_for(:article).merge(categorizations_attr)
+  }
 
   describe 'GET #index' do
-    context 'ログインユーザの場合' do
-      before { sign_in user }
+    context 'ログイン管理者の場合' do
+      before { sign_in admin }
 
       it '一覧ページが表示されること' do
         get :index
@@ -29,17 +30,17 @@ describe Phoga::ArticlesController do
       end
     end
 
-    context '非ログインユーザの場合' do
+    context '非ログイン管理者の場合' do
       it 'ログインページにリダイレクトされること' do
         get :index
-        expect(response).to redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_admin_session_path)
       end
     end
   end
 
   describe 'GET #show' do
-    context 'ログインユーザの場合' do
-      before { sign_in user }
+    context 'ログイン管理者の場合' do
+      before { sign_in admin }
 
       it '個別ページが表示されること' do
         get :show, id: article.id
@@ -48,17 +49,17 @@ describe Phoga::ArticlesController do
       end
     end
 
-    context '非ログインユーザの場合' do
+    context '非ログイン管理者の場合' do
       it 'ログインページにリダイレクトされること' do
         get :show, id: article.id
-        expect(response).to redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_admin_session_path)
       end
     end
   end
 
   describe 'GET #new' do
-    context 'ログインユーザの場合' do
-      before { sign_in user }
+    context 'ログイン管理者の場合' do
+      before { sign_in admin }
 
       it '新規作成ページが表示されること' do
         get :new
@@ -67,24 +68,34 @@ describe Phoga::ArticlesController do
       end
     end
 
-    context '非ログインユーザの場合' do
+    context '非ログイン管理者の場合' do
       it 'ログインページにリダイレクトされること' do
         get :new
-        expect(response).to redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_admin_session_path)
       end
     end
   end
 
   describe 'POST #create' do
-    context 'ログインユーザの場合' do
+    context 'ログイン管理者の場合' do
       before do
-        sign_in user
-        article_attr.merge!({ user_id: user.id })
+        sign_in admin
+        article_attr.merge!({ admin_id: admin.id })
       end
 
-      it 'Artistの件数が1つ増えること' do
+      it 'Phoga::Articleの件数が1つ増えること' do
         expect{ post :create, article: article_attr }.
           to change(Phoga::Article, :count).by(1)
+      end
+
+      it 'Phoga::Categorizationも同時に保存されること' do
+        expect{ post :create, article: article_attr }.
+          to change(Phoga::Categorization, :count).by(2)
+      end
+
+      it 'Phoga::CustomFieldも同時に保存されること' do
+        expect{ post :create, article: article_attr }.
+          to change(Phoga::CustomField, :count).by(2)
       end
 
       it 'Article作成後に個別ページにリダイレクトされること' do
@@ -95,17 +106,17 @@ describe Phoga::ArticlesController do
       end
     end
 
-    context '非ログインユーザの場合' do
+    context '非ログイン管理者の場合' do
       it 'ログインページにリダイレクトされること' do
         get :create
-        expect(response).to redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_admin_session_path)
       end
     end
   end
 
   describe 'GET #edit' do
-    context 'ログインユーザの場合' do
-      before { sign_in user }
+    context 'ログイン管理者の場合' do
+      before { sign_in admin }
 
       it '編集ページが表示されること' do
         get :edit, id: article.id
@@ -114,19 +125,19 @@ describe Phoga::ArticlesController do
       end
     end
 
-    context '非ログインユーザの場合' do
+    context '非ログイン管理者の場合' do
       it 'ログインページにリダイレクトされること' do
         get :edit, id: article.id
-        expect(response).to redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_admin_session_path)
       end
     end
   end
 
   describe 'PUT #update' do
-    context 'ログインユーザの場合' do
+    context 'ログイン管理者の場合' do
       before do
-        sign_in user
-        article_attr.merge!({ user_id: user.id, title: 'update title' })
+        sign_in admin
+        article_attr.merge!({ admin_id: admin.id, title: 'update title' })
       end
 
       it 'Articleが更新されること' do
@@ -138,17 +149,17 @@ describe Phoga::ArticlesController do
       end
     end
 
-    context '非ログインユーザの場合' do
+    context '非ログイン管理者の場合' do
       it 'ログインページにリダイレクトされること' do
         put :update, id: article.id
-        expect(response).to redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_admin_session_path)
       end
     end
   end
 
   describe 'DELETE #destroy' do
-    context 'ログインユーザの場合' do
-      before { sign_in user }
+    context 'ログイン管理者の場合' do
+      before { sign_in admin }
 
       it 'Articleの件数が1つ減ること' do
         expect{ delete :destroy, id: article.id }.
@@ -163,10 +174,10 @@ describe Phoga::ArticlesController do
       end
     end
 
-    context '非ログインユーザの場合' do
+    context '非ログイン管理者の場合' do
       it 'ログインページにリダイレクトされること' do
         delete :destroy, id: article.id
-        expect(response).to redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_admin_session_path)
       end
     end
   end

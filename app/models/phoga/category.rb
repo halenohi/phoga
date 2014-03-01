@@ -4,9 +4,9 @@ module Phoga
       dependent: :destroy
 
     has_many :categorized_articles,
+      -> { where({ 'phoga_categorizations.categorizable_type' => 'Phoga::Article' }) },
       through: :categorizations,
-      source: :article,
-      conditions: "phoga_categorizations.categorizable_type = 'Phoga::Article'"
+      source: :article
 
     belongs_to :parent,
       class_name: 'Phoga::Category',

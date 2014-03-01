@@ -12,7 +12,7 @@ end
 if Phoga::Article.count == 0
   article = Phoga::Article.new({
     title: 'Sample Title',
-    body: 'sample article body...',
+    content: 'sample article body...',
     admin_id: Phoga::Admin.count != 0 ? 1 : nil
   })
   article.save!
@@ -62,11 +62,10 @@ end
 
 if Phoga::CustomField.count == 0
   article = Phoga::Article.find(1)
-  custom_field = Phoga::CustomField.create({
+  article.custom_fields << Phoga::CustomField.new({
     name: 'sample custom field',
     content: 'sample custom field content'
   })
-  puts custom_field.inspect
-  article.custom_field_assignments.create({ custom_field_id: custom_field.id })
-  puts article.custom_field_assignments.inspect
+  article.save!
+  puts article.custom_fields
 end

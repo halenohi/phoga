@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140220044668) do
+ActiveRecord::Schema.define(version: 20140221094920) do
 
   create_table "phoga_admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20140220044668) do
 
   create_table "phoga_articles", force: true do |t|
     t.string   "title"
-    t.text     "body"
+    t.text     "content"
     t.datetime "published_at"
     t.integer  "admin_id"
     t.datetime "created_at"
@@ -92,20 +92,11 @@ ActiveRecord::Schema.define(version: 20140220044668) do
 
   add_index "phoga_comments", ["commentable_type", "commentable_id"], name: "commentable_index"
 
-  create_table "phoga_custom_field_assignments", force: true do |t|
-    t.string   "assignable_type"
-    t.integer  "assignable_id"
-    t.integer  "custom_field_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "phoga_custom_field_assignments", ["assignable_type", "assignable_id", "custom_field_id"], name: "assignable_index"
-
   create_table "phoga_custom_fields", force: true do |t|
     t.string   "name"
     t.text     "content"
     t.string   "image"
+    t.integer  "article_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

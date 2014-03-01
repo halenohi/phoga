@@ -4,6 +4,7 @@ class CreatePhogaCustomFields < ActiveRecord::Migration
       t.string :name
       t.text :content
       t.string :image
+      t.integer :article_id
 
       t.timestamps
     end

@@ -1,12 +1,7 @@
 class Phoga::ArticlesController < Phoga::ApplicationController
   # GET /admin/articles
   def index
-    @articles = Phoga::Article.scoped.page(params[:page]).per(30)
-  end
-
-  # GET /admin/articles/:id
-  def show
-    @article = Phoga::Article.find(params[:id])
+    @articles = Phoga::Article.page(params[:page]).per(30)
   end
 
   # GET /admin/articles/new
@@ -16,9 +11,9 @@ class Phoga::ArticlesController < Phoga::ApplicationController
 
   # POST /admin/articles
   def create
-    @article = Phoga::Article.new(params[:article])
+    @article = Phoga::Article.new(article_params)
     if @article.save
-      redirect_to @article, notice: ''
+      redirect_to edit_article_path(@article), notice: ''
     else
       flash[:alert] = ''
       render :new
@@ -33,8 +28,8 @@ class Phoga::ArticlesController < Phoga::ApplicationController
   # PUT /admin/articles/:id
   def update
     @article = Phoga::Article.find(params[:id])
-    if @article.update_attributes(params[:article])
-      redirect_to @article, notice: ''
+    if @article.update_attributes(article_params)
+      redirect_to edit_article_path(@article), notice: ''
     else
       flash[:alert] = ''
       render :edit
@@ -47,4 +42,13 @@ class Phoga::ArticlesController < Phoga::ApplicationController
     @article.destroy
     redirect_to articles_path, notice: ''
   end
+
+  private
+    def article_params
+      params.require(:article)
+        .permit(:title, :body, :admin_id,
+                categorizations_attributes: [:category_id],
+                custom_fields_attributes: [:name, :content, :image])
+        .merge({ admin_id: current_admin.id })
+    end
 end
