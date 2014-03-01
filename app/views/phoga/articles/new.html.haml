@@ -1,11 +1,1 @@
-= render 'links'
-
-= form_for @article do |f|
-  %div
-    = f.label :title
-    = f.text_field :title
-  %div
-    = f.label :content
-    = f.text_area :content
-  %div
-    = f.submit (@article.persisted? ? '更新' : '保存')
+= render 'form'

@@ -1,0 +1,11 @@
+= form_for @article, { role: 'form' } do |f|
+  .form-group
+    = f.label :title
+    = f.text_field :title, { class: 'form-control', placeholder: 'タイトルを入力' }
+
+  .form-group
+    = f.label :content
+    = f.text_area :content, { class: 'form-control', rows: 10 }
+
+  .form-group
+    = f.submit (@article.persisted? ? '更新' : '保存'), { class: 'btn btn-primary' }

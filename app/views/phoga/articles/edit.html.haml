@@ -1,0 +1,4 @@
+= render 'form'
+
+.well
+  = link_to 'この記事を削除', @article, { class: 'btn btn-danger', data: { method: 'delete', confirm: '本当に削除してよろしいですか？' } }

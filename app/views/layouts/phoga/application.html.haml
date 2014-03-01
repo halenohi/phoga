@@ -8,4 +8,36 @@
     = javascript_include_tag 'phoga/application'
     = csrf_meta_tags
   %body
-    = yield
+    .wrapper
+      .navigation
+        %nav.navbar
+          .navbar-brandname
+            %a{ 'data-url' => '#' , class: 'nav-effect' }Phoga
+          %ul.nav-list
+            %li
+              = link_to articles_path, { class: 'nav-effect' } do
+                %span.glyphicon.glyphicon-file 記事一覧
+            -#%li
+              %a{ 'data-url' => '#', class: 'nav-effect' }
+                %span.glyphicon.glyphicon-folder-close &nbsp;カテゴリー
+            -#%li
+              %a{ 'data-url' => '#', class: 'nav-effect' }
+                %span.glyphicon.glyphicon-tags &nbsp;タグ
+            -#%li
+              %a{ 'data-url' => '#', class: 'nav-effect' }
+                %span.glyphicon.glyphicon-comment &nbsp;コメント
+            -#%li
+              %a{ 'data-url' => '#', class: 'nav-effect' } 
+                %span.glyphicon.glyphicon-user &nbsp;管理者
+          %ul.nav-list
+            %li
+              = link_to destroy_admin_session_path, { class: 'nav-effect', data: { method: 'delete' } } do
+                %span.glyphicon.glyphicon-file ログアウト
+            -#%li
+      .main-container
+        -#%button{ type: 'button', class: 'navbar-toggle expand-navigation-button', 'data-toggle' => 'collapse', 'data-target' => '.bs-navbar-collapse' }
+          %span.sr-only Toggle navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        = yield
