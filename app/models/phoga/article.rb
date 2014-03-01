@@ -16,6 +16,7 @@ module Phoga
     has_many :tags,
       through: :taggings,
       class_name: 'Phoga::Tag'
+
     has_many :categorizations,
       as: :categorizable,
       dependent: :destroy,
