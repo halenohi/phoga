@@ -1,0 +1,55 @@
+.navigation {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 100%;
+  background-color: #292929;
+  &.navigation--expanded {
+    display: block;
+    width: 180px;
+  }
+}
+
+.nav-effect {
+  font-family: 'Bubbler One', sans-serif;
+  display: block;
+  color: #aaa;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  &:hover {
+    color: #90e2d2;
+    background-color: #111 !important;
+  }
+}
+
+.navbar {
+  margin: 0;
+  border-radius: 0;
+  border: 0;
+}
+
+.navbar-brandname {
+  padding: 0;
+  height: 90px;
+  font-size: 18px;
+  line-height: 90px;
+  text-align: center;
+}
+
+.nav-list {
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list>li>a {
+  padding: 20px 30px;
+}
+
+//Tablet
+@media (min-width: 768px) {
+  .navigation {
+    display:block;
+  }
+}
