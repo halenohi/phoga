@@ -22,7 +22,8 @@ module Phoga
       dependent: :destroy,
       class_name: 'Phoga::Categorization'
     accepts_nested_attributes_for :categorizations,
-      allow_destroy: true
+      allow_destroy: true,
+      reject_if: :reject_categorization
 
     has_many :categories,
       through: :categorizations,
@@ -37,5 +38,18 @@ module Phoga
       as: :commentable,
       dependent: :destroy,
       class_name: 'Phoga::Comment'
+
+    # after_initialize :set_default_categorization
+    # before_save :clean_categorizations
+
+    def set_default_categorization
+      if self.categorizations.empty?
+        self.categorizations.build
+      end
+    end
+
+    def reject_categorization(categorization_attr)
+      categorization_attr['category_id'].blank?
+    end
   end
 end

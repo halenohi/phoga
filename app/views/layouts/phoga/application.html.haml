@@ -19,7 +19,7 @@
                 %i.glyphicon.glyphicon-file
                 記事一覧
             %li
-              %a{ href: '#', class: 'nav-effect' }
+              = link_to categories_path, { class: 'nav-effect' } do
                 %i.glyphicon.glyphicon-folder-close
                 カテゴリー
             -#%li

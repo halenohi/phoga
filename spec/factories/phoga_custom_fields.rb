@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :custom_field, :class => 'Phoga::CustomField' do
     name "MyString"
     content "MyText"
-    image "MyString"
+    # image "MyString"
   end
 end

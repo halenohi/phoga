@@ -11,5 +11,8 @@ module Phoga
     belongs_to :article,
       foreign_key: :categorizable_id,
       class_name: 'Phoga::Article'
+
+    validates :categorizable_type,
+      presence: true
   end
 end

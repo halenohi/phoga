@@ -38,25 +38,6 @@ describe Phoga::ArticlesController do
     end
   end
 
-  describe 'GET #show' do
-    context 'ログイン管理者の場合' do
-      before { sign_in admin }
-
-      it '個別ページが表示されること' do
-        get :show, id: article.id
-        expect(assigns[:article]).to eq(article)
-        expect(response).to be_success
-      end
-    end
-
-    context '非ログイン管理者の場合' do
-      it 'ログインページにリダイレクトされること' do
-        get :show, id: article.id
-        expect(response).to redirect_to(new_admin_session_path)
-      end
-    end
-  end
-
   describe 'GET #new' do
     context 'ログイン管理者の場合' do
       before { sign_in admin }
@@ -102,7 +83,7 @@ describe Phoga::ArticlesController do
         post :create, article: article_attr
         expect(assigns[:article]).to be_an_instance_of(Phoga::Article)
         expect(flash.now[:notice]).to_not be_nil
-        expect(response).to redirect_to(assigns[:article])
+        expect(response).to redirect_to(edit_article_path(assigns[:article]))
       end
     end
 
@@ -144,7 +125,7 @@ describe Phoga::ArticlesController do
         put :update, id: article.id, article: article_attr
         expect(assigns[:article]).to eq(article)
         expect(flash.now[:notice]).to_not be_nil
-        expect(response).to redirect_to(article)
+        expect(response).to redirect_to(edit_article_path(article))
         expect(Phoga::Article.find(article.id).title).to eq('update title')
       end
     end

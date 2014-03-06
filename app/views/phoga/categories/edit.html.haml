@@ -1,0 +1,4 @@
+= render 'form'
+
+.well
+  = link_to 'このカテゴリーを削除', @category, { class: 'btn btn-danger', data: { method: 'delete', confirm: '本当に削除してよろしいですか？' } }

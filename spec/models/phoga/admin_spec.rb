@@ -1,6 +1,6 @@
 require 'spec_helper'
 
 module Phoga
-  describe User do
+  describe Admin do
   end
 end

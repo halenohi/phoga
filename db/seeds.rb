@@ -45,17 +45,11 @@ end
 if Phoga::Category.count == 0
   article = Phoga::Article.find(1)
   category = Phoga::Category.create({
-    name: 'sample category',
-    slug: 'sample-category'
+    name: 'Other',
+    slug: 'other'
   })
   puts category.inspect
-  child_category = Phoga::Category.create({
-    name: 'sample child category',
-    slug: 'sample-child-category',
-    parent_id: category.id
-  })
-  puts child_category.inspect
-  categorization = article.categorizations.create({ category_id: child_category.id })
+  categorization = article.categorizations.create({ category_id: category.id })
   puts categorization.inspect
 end
 

@@ -1,7 +1,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :phoga_comment, :class => 'Comment' do
+  factory :comment, :class => 'Phoga::Comment' do
     commentable_type "MyString"
     commentable_id 1
     author_email 'sample@example.com'

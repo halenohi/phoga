@@ -8,4 +8,9 @@
     = f.text_area :content, { class: 'form-control', rows: 10 }
 
   .form-group
+    = f.label :categorizations
+    = f.fields_for :categorizations do |cf|
+      = cf.collection_select :category_id, Phoga::Category.all, :id, :name
+
+  .form-group
     = f.submit (@article.persisted? ? '更新' : '保存'), { class: 'btn btn-primary' }

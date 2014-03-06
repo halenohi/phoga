@@ -1,0 +1,14 @@
+%table.table
+  %thead
+    %tr
+      %th 名称
+      %th &nbsp;
+  %tbody
+    - @categories.each do |category|
+      %tr
+        %td= category.name
+        %td
+          = link_to '編集', edit_category_path(category), { class: 'btn btn-default' }
+
+.well
+  = link_to '新規作成', new_category_path, { class: 'btn btn-default' }

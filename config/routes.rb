@@ -1,8 +1,10 @@
 Phoga::Engine.routes.draw do
   constraints scheme: Rails.env.production? ? 'https' : 'http' do
-    root to: 'dashboard#show'
+    root to: 'articles#index'
 
     resources :articles, except: [:show]
+
+    resources :categories
 
     devise_for :admins, {
       class_name: "Phoga::Admin",
