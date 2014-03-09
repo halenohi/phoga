@@ -6,7 +6,7 @@ module Phoga
     describe 'Validations' do
       let(:article) { FactoryGirl.build(:article) }
 
-      describe 'user_id' do
+      describe 'admin_id' do
         it '必ず入力されていること' do
           article.admin_id = nil
           article.valid?
