@@ -13,9 +13,9 @@ class Phoga::ArticlesController < Phoga::ApplicationController
   def create
     @article = Phoga::Article.new(article_params)
     if @article.save
-      redirect_to edit_article_path(@article), notice: ''
+      redirect_to edit_article_path(@article), notice: '記事を作成しました'
     else
-      flash[:alert] = ''
+      flash.now[:alert] = '記事を作成出来ませんでした'
       render :new
     end
   end
@@ -29,9 +29,9 @@ class Phoga::ArticlesController < Phoga::ApplicationController
   def update
     @article = Phoga::Article.find(params[:id])
     if @article.update_attributes(article_params)
-      redirect_to edit_article_path(@article), notice: ''
+      redirect_to edit_article_path(@article), notice: '記事を更新しました'
     else
-      flash[:alert] = ''
+      flash.now[:alert] = '記事を更新出来ませんでした'
       render :edit
     end
   end
@@ -40,7 +40,7 @@ class Phoga::ArticlesController < Phoga::ApplicationController
   def destroy
     @article = Phoga::Article.find(params[:id])
     @article.destroy
-    redirect_to articles_path, notice: ''
+    redirect_to articles_path, notice: '記事を削除しました'
   end
 
   private
@@ -48,7 +48,8 @@ class Phoga::ArticlesController < Phoga::ApplicationController
       params.require(:article)
         .permit(:title, :content, :admin_id,
                 categorizations_attributes: [:category_id],
-                custom_fields_attributes: [:name, :content, :image])
+                custom_fields_attributes: [:name, :content, :image],
+                taggings_attributes: [:tag_id])
         .merge({ admin_id: current_admin.id })
     end
 end

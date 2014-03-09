@@ -14,22 +14,5 @@ module Phoga
         end
       end
     end
-
-    describe 'after_initialize: set_default_categorization' do
-      context 'インスタンス生成後にcategorizationsが空だったら' do
-        it 'categorizationsのインスタンスを生成すること' do
-          @article = Phoga::Article.new
-          expect(@article.categorizations.first).to be_an_instance_of(Phoga::Categorization)
-        end
-      end
-
-      context 'インスタンス生成後にcategorizationsが空じゃなかったら' do
-        it 'categorizationsのインスタンスを生成しないこと' do
-          article = FactoryGirl.create(:article)
-          result = Phoga::Article.last.categorizations.select{|cat| !cat.persisted? }
-          expect(result).to eq([])
-        end
-      end
-    end
   end
 end

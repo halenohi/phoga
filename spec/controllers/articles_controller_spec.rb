@@ -4,7 +4,7 @@ require 'spec_helper'
 describe Phoga::ArticlesController do
   prepare_admin
 
-  let!(:article) { FactoryGirl.create(:article) }
+  let!(:article) { FactoryGirl.create(:article, { admin_id: admin.id }) }
   let(:article_attr) {
     categorizations_attr = {
       categorizations_attributes: [
@@ -14,6 +14,10 @@ describe Phoga::ArticlesController do
       custom_fields_attributes: [
         FactoryGirl.attributes_for(:custom_field),
         FactoryGirl.attributes_for(:custom_field)
+      ],
+      taggings_attributes: [
+        FactoryGirl.build(:tagging_for_attr).attributes,
+        FactoryGirl.build(:tagging_for_attr).attributes
       ]
     }
     FactoryGirl.attributes_for(:article).merge(categorizations_attr)
@@ -77,6 +81,11 @@ describe Phoga::ArticlesController do
       it 'Phoga::CustomFieldも同時に保存されること' do
         expect{ post :create, article: article_attr }.
           to change(Phoga::CustomField, :count).by(2)
+      end
+
+      it 'Phoga::Taggingも同時に保存されること' do
+        expect{ post :create, article: article_attr }.
+          to change(Phoga::Tagging, :count).by(2)
       end
 
       it 'Article作成後に個別ページにリダイレクトされること' do
