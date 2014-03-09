@@ -6,6 +6,8 @@ Phoga::Engine.routes.draw do
 
     resources :categories
 
+    resources :tags, except: [:show]
+
     devise_for :admins, {
       class_name: "Phoga::Admin",
       path: '/',
