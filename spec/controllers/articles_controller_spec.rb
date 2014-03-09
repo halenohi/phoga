@@ -137,6 +137,14 @@ describe Phoga::ArticlesController do
         expect(response).to redirect_to(edit_article_path(article))
         expect(Phoga::Article.find(article.id).title).to eq('update title')
       end
+
+      context '保存されているPhoga::Categoryのidが送信されなかった場合' do
+        it '該当のPhoga::Categorizationは削除されること' do
+          old_categorizations = article.categorizations
+          put :update, id: article.id, article: article_attr
+          expect(article.reload.categorizations == old_categorizations).to_not be
+        end
+      end
     end
 
     context '非ログイン管理者の場合' do
