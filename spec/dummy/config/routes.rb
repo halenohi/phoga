@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
 
-  mount Phoga::Engine => "/admin"
+  mount Phoga::Engine => "/phoga"
 end
