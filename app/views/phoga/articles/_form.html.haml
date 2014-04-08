@@ -1,4 +1,4 @@
-= form_for @article, { role: 'form' } do |f|
+= form_for setup_categorizations(@article), { role: 'form' } do |f|
   .form-group
     = f.label :title
     = f.text_field :title, { class: 'form-control', placeholder: 'タイトルを入力' }
@@ -11,11 +11,13 @@
     .col-sm-6
       = f.label :categorizations
       %ul
-        - Phoga::Category.all.each do |cat|
+        = f.fields_for :categorizations do |cf|
           %li
             %label
-              %input{ type: 'checkbox', name: 'article[categorizations_attributes][][category_id]', checked: @article.categorizations.select{|c| c.category_id == cat.id }.any?, value: cat.id }
-              = cat.name
+              = cf.hidden_field :id
+              = cf.hidden_field :category_id
+              = cf.check_box :apply, { checked: cf.object.persisted? }
+              = cf.object.category.name
 
     .col-sm-6
       = f.label :taggings
@@ -33,3 +35,9 @@
 
   .form-group
     = f.submit (@article.persisted? ? '更新' : '保存'), { class: 'btn btn-primary' }
+
+    - Phoga::Category.all.each do |cat|
+      %label
+        %input{ type: 'checkbox', name: "article[categorizations_attributes][][category_id]", value: cat.id }
+        = cat.name
+

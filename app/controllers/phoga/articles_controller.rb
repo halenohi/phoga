@@ -1,4 +1,6 @@
 class Phoga::ArticlesController < Phoga::ApplicationController
+  include Phoga::ArticleFormHelper
+
   # GET /admin/articles
   def index
     @articles = Phoga::Article.page(params[:page]).per(30)
@@ -7,6 +9,7 @@ class Phoga::ArticlesController < Phoga::ApplicationController
   # GET /admin/articles/new
   def new
     @article = Phoga::Article.new
+    @categories = Phoga::Category.all
   end
 
   # POST /admin/articles
@@ -23,12 +26,12 @@ class Phoga::ArticlesController < Phoga::ApplicationController
   # GET /admin/article/:id/edit
   def edit
     @article = Phoga::Article.find(params[:id])
+    @categories = Phoga::Category.all
   end
 
   # PUT /admin/articles/:id
   def update
     @article = Phoga::Article.find(params[:id])
-    set_destroy_param_to_categorizations
     if @article.update_attributes(article_params)
       redirect_to edit_article_path(@article), notice: '記事を更新しました'
     else
@@ -46,21 +49,13 @@ class Phoga::ArticlesController < Phoga::ApplicationController
 
   private
     def article_params
-      @article_params ||= params.require(:article)
-        .permit(:title, :content, :admin_id,
-                categorizations_attributes: [:category_id],
-                custom_fields_attributes: [:name, :content, :image],
-                taggings_attributes: [:tag_id])
-        .merge({ admin_id: current_admin.id })
-    end
-
-    def set_destroy_param_to_categorizations
-      article_params[:categorizations_attributes] ||= []
-      category_ids_param = article_params[:categorizations_attributes].map{|c| c[:category_id] }
-      discarded_category_ids = @article.category_ids - category_ids_param
-      article_params[:categorizations_attributes].concat discarded_category_ids.map{ |cat_id|
-        id = @article.categorizations.select{|c| c.category_id == cat_id }.first.id
-        { id: id, category_id: cat_id, _destroy: true }
-      }
+      @article_params ||= setup_categorizations_attributes(
+        params.require(:article)
+          .permit(:title, :content, :admin_id,
+                  categorizations_attributes: [:id, :category_id, :apply],
+                  custom_fields_attributes: [:name, :content, :image],
+                  taggings_attributes: [:tag_id])
+          .merge({ admin_id: current_admin.id })
+      )
     end
 end
