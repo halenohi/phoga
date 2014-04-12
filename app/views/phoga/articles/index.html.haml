@@ -2,11 +2,16 @@
   %thead
     %tr
       %th タイトル
+      %th カテゴリー
       %th &nbsp;
   %tbody
     - @articles.each do |article|
       %tr
         %td= link_to article.title, edit_article_path(article)
+        %td
+          - article.categories.each do |cat|
+            = link_to cat.name, category_path(cat)
+            = ' / ' if article.categories.last != cat
         %td= link_to '削除', article, { class: 'btn btn-default', method: :delete, data: { confirm: 'Realy?' } }
 
 .well

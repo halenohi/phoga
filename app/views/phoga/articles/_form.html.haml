@@ -20,24 +20,8 @@
               = cf.object.category.name
 
     .col-sm-6
-      = f.label :taggings
-      %input#tag-name.form-control{ type: 'text', placeholder: 'タグ名を入力してEnterで追加' }
-      %ul.taggings
-      :plain
-        <script id="tagging-template" type="text/template">
-          <li class="tagging">
-            <span class="tagging__name"><%= name %></span>
-            <a href="#" class="tagging__remove-button">&times;</a>
-            <input type="hidden" name="article[taggings_attributes][][tag_id]" val="<%= id %>" />
-            <input type="hidden" name="article[taggings_attributes][][_destroy]" />
-          </li>
-        </script>
+      = f.label :tags
+      = f.text_field :tag_names, { value: @article.tag_names_string, placeholder: 'Add New', data: { role: 'tagsinput' }}
 
   .form-group
     = f.submit (@article.persisted? ? '更新' : '保存'), { class: 'btn btn-primary' }
-
-    - Phoga::Category.all.each do |cat|
-      %label
-        %input{ type: 'checkbox', name: "article[categorizations_attributes][][category_id]", value: cat.id }
-        = cat.name
-

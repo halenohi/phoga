@@ -3,3 +3,5 @@ window.Phoga =
   Collections: {}
   Views: {}
   Routers: {}
+  Modules: {}
+  URLRoot: "/#{ location.pathname.split('/')[1] }"

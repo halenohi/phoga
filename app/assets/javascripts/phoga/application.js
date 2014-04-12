@@ -1,10 +1,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require ./bootstrap-tagsinput
 //
 //= require underscore
 //= require backbone
 //= require ./phoga
+//= require_tree ./modules
 //= require_tree ../../templates
 //= require_tree ./models
 //= require_tree ./collections

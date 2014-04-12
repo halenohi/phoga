@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency "bootstrap-sass", "~> 3.1.0.2"
   s.add_dependency "font-awesome-sass-rails", "~> 3.0.2.2"
   s.add_dependency "backbone-on-rails", "~> 1.1.0.0"
+  s.add_dependency "eco", "~> 1.0.0"
 
   s.add_dependency "mini_magick"
   s.add_dependency "carrierwave"

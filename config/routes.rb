@@ -18,5 +18,9 @@ Phoga::Engine.routes.draw do
         passwords:     'phoga/admins/passwords'
       }
     }
+
+    namespace :api do
+      resources :tags
+    end
   end
 end

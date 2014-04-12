@@ -11,12 +11,14 @@ module Phoga
       dependent: :destroy,
       class_name: 'Phoga::Tagging'
     accepts_nested_attributes_for :taggings,
-      allow_destroy: true,
-      reject_if: :reject_tagging
+      allow_destroy: true
 
     has_many :tags,
       through: :taggings,
       class_name: 'Phoga::Tag'
+    accepts_nested_attributes_for :tags,
+      allow_destroy: true,
+      reject_if: :reject_tag
 
     has_many :categorizations,
       as: :categorizable,
@@ -44,8 +46,20 @@ module Phoga
       tagging_attr['tag_id'].blank?
     end
 
+    def reject_tag(tag_attr)
+      self.tags.select{|t| t.name == tag_attr[:name] }.any?
+    end
+
     def reject_categorization(categorization_attr)
       categorization_attr['category_id'].blank?
+    end
+
+    def tag_names
+      self.tags.pluck :name
+    end
+
+    def tag_names_string
+      tag_names.join(',')
     end
   end
 end

@@ -2,11 +2,13 @@
   %thead
     %tr
       %th 名称
+      %th スラッグ
       %th &nbsp;
   %tbody
     - @categories.each do |category|
       %tr
         %td= category.name
+        %td= category.slug
         %td
           = link_to '編集', edit_category_path(category), { class: 'btn btn-default' }
 

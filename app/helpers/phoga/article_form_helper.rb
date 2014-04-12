@@ -25,4 +25,29 @@ module Phoga::ArticleFormHelper
     article_params[:categorizations_attributes] = attrs
     article_params
   end
+
+  def setup_tags_and_taggings_attributes(article_params, article)
+    article_params[:taggings_attributes] ||= []
+    updates = article_params.delete(:tag_names).split(',')
+    currents = article.tag_names
+    dels = currents - updates
+    adds = updates - currents
+    dels.each do |del|
+      article_params[:taggings_attributes].push({
+        id: article.taggings.select{ |tagging| tagging.tag.name == del }.first.id,
+        _destroy: true
+      })
+    end
+    adds.each_with_index do |add, i|
+      tag = Phoga::Tag.find_by_name(add)
+      if tag.present?
+        adds.slice!(i)
+        article_params[:taggings_attributes].push({
+          tag_id: tag.id
+        })
+      end
+    end
+    article_params[:tags_attributes] = adds.map{ |add| { name: add } }
+    article_params
+  end
 end
