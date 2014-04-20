@@ -1,4 +1,12 @@
-= form_for setup_categorizations(@article), { role: 'form' } do |f|
+= nested_form_for setup_categorizations(@article), { role: 'form' } do |f|
+  - if @article.errors.any?
+    .panel.panel-danger
+      .panel-heading Error
+      .panel-body
+        %ul
+          - @article.errors.full_messages.each do |message|
+            %li= message
+
   .form-group
     = f.label :title
     = f.text_field :title, { class: 'form-control', placeholder: 'タイトルを入力' }
@@ -22,6 +30,24 @@
     .col-sm-6
       = f.label :tags
       = f.text_field :tag_names, { value: @article.tag_names_string, placeholder: 'Add New', data: { role: 'tagsinput' }}
+
+  = f.fields_for :custom_fields do |cf|
+    .panel.panel-default
+      .panel-heading カスタムフィールド
+      .panel-body
+        = cf.hidden_field :id if cf.object.persisted?
+        .form-group
+          = cf.label :name
+          = cf.text_field :name, { class: 'form-control' }
+        .form-group
+          = cf.label :image
+          = cf.file_field :image
+        .form-group
+          = cf.label :content
+          = cf.text_area :content, { class: 'form-control', rows: 1 }
+      .panel-footer
+        = cf.link_to_remove 'Remove this Custom Field'
+  %p= f.link_to_add 'Add a Custom Field', :custom_fields
 
   .form-group
     = f.submit (@article.persisted? ? '更新' : '保存'), { class: 'btn btn-primary' }

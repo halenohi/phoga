@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require ./bootstrap-tagsinput
+//= require jquery_nested_form
 //
 //= require underscore
 //= require backbone

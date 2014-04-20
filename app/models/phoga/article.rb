@@ -35,7 +35,8 @@ module Phoga
     has_many :custom_fields,
       class_name: 'Phoga::CustomField'
     accepts_nested_attributes_for :custom_fields,
-      allow_destroy: true
+      allow_destroy: true,
+      reject_if: :all_blank
 
     has_many :comments,
       as: :commentable,

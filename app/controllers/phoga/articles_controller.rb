@@ -53,7 +53,7 @@ class Phoga::ArticlesController < Phoga::ApplicationController
         params.require(:article)
           .permit(:title, :content, :admin_id, :tag_names,
                   categorizations_attributes: [:id, :category_id, :apply],
-                  custom_fields_attributes: [:name, :content, :image],
+                  custom_fields_attributes: [:id, :name, :content, :image, :_destroy],
                   taggings_attributes: [:id, :_destroy],
                   tags_attributes: [:name])
           .merge({ admin_id: current_admin.id })
