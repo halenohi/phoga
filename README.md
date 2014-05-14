@@ -22,7 +22,7 @@ Phoga::Engine.load_seed
 
 ```
 # config/routes.rb
-mount Phoga::Engine, at: '/admin'
+mount Phoga::Engine, at: '/phoga'
 ```
 
 設定を追加したら以下のコマンドでDBを構築し初期データを投入します
@@ -41,6 +41,12 @@ $ open http://localhost:3000/admin
 ```
 
 初期時のユーザーは ```sample@example.com``` パスワードは ```samplepass``` でログインできます
+
+以上の処理を一気に実行するコマンドがこちらです
+
+```
+$ bundle exec rake phoga:install
+```
 
 Contribution
 ============
