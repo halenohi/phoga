@@ -7,9 +7,8 @@
 //
 //= require underscore
 //= require backbone
-//= require ./phoga
 //= require_tree ./modules
-//= require_tree ../../templates
+//= require_tree ../../templates/phoga
 //= require_tree ./models
 //= require_tree ./collections
 //= require_tree ./views
