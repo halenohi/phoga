@@ -1,12 +1,14 @@
 %table.table
   %thead
     %tr
+      %th id
       %th タイトル
       %th カテゴリー
       %th &nbsp;
   %tbody
     - @articles.each do |article|
       %tr
+        %td= article.id
         %td= link_to article.title, edit_article_path(article)
         %td
           - article.categories.each do |cat|

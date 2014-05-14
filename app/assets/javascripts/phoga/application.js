@@ -1,8 +1,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require ./bootstrap-tagsinput
 //= require jquery_nested_form
+//= require ./bootstrap-tagsinput
+//= require ./jquery.autosize
 //
 //= require underscore
 //= require backbone

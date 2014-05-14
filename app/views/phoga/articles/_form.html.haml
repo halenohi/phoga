@@ -33,7 +33,9 @@
 
   = f.fields_for :custom_fields do |cf|
     .panel.panel-default
-      .panel-heading カスタムフィールド
+      .panel-heading
+        カスタムフィールド
+        = cf.link_to_remove '&times;'.html_safe, { class: 'close', data: { confirm: 'このカスタムフィールドを削除してよろしいですか？' } }
       .panel-body
         = cf.hidden_field :id if cf.object.persisted?
         .form-group
@@ -45,9 +47,7 @@
         .form-group
           = cf.label :content
           = cf.text_area :content, { class: 'form-control', rows: 1 }
-      .panel-footer
-        = cf.link_to_remove 'Remove this Custom Field'
-  %p= f.link_to_add 'Add a Custom Field', :custom_fields
+  %p= f.link_to_add 'カスタムフィールドを追加', :custom_fields
 
   .form-group
     = f.submit (@article.persisted? ? '更新' : '保存'), { class: 'btn btn-primary' }
