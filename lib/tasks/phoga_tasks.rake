@@ -14,7 +14,7 @@ namespace :phoga do
 
   desc 'マウント対象のアプリケーションのconfig/routes.rbにマウントコードを追加'
   task :add_config_routes do
-    mount_code = '  mount Phoga::Engine => "/admin"'
+    mount_code = '  mount Phoga::Engine => "/phoga"'
     routes_file = File.open(Rails.root.join('config/routes.rb'), 'r+')
     routes_lines = routes_file.read.split("\n")
     mount_code_index = routes_lines.index { |line| line =~ Regexp.new(mount_code) }
