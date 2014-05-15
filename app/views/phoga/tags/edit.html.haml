@@ -1,0 +1,4 @@
+= render 'form'
+
+.well
+  = link_to 'このタグを削除', @tag, { class: 'btn btn-danger', data: { method: 'delete', confirm: '本当に削除してよろしいですか？' } }
