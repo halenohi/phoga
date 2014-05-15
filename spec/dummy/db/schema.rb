@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140304145651) do
+ActiveRecord::Schema.define(version: 20140515032138) do
 
   create_table "phoga_admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 20140304145651) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
 
   add_index "phoga_tags", ["name"], name: "index_phoga_tags_on_name", unique: true
