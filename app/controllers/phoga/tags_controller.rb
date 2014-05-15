@@ -13,7 +13,7 @@ class Phoga::TagsController < Phoga::ApplicationController
   def create
     @tag = Phoga::Tag.new(tag_params)
     if @tag.save
-      redirect_to edit_tag_path(@tag), notice: 'タグを登録しました' }
+      redirect_to edit_tag_path(@tag), notice: 'タグを登録しました'
     else
       flash.now[:alert] = 'タグを登録できませんでした'
       render :new

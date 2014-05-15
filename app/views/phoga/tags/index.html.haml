@@ -2,13 +2,11 @@
   %thead
     %tr
       %th 名称
-      %th スラッグ
       %th &nbsp;
   %tbody
     - @tags.each do |tag|
       %tr
         %td= tag.name
-        %td= tag.slug
         %td
           = link_to '編集', edit_tag_path(tag), { class: 'btn btn-default' }
 
