@@ -5,6 +5,7 @@ require 'rspec/rails'
 # require 'rspec/autorun'
 require 'factory_girl_rails'
 require 'tapp'
+require 'capybara/rspec'
 
 Rails.backtrace_cleaner.remove_silencers!
 
@@ -52,6 +53,9 @@ RSpec.configure do |config|
   config.before(:each) do
     DatabaseCleaner.clean
   end
+
+  config.include FeatureMacros, type: :feature
+  config.include Phoga::Engine.routes.url_helpers
 end
 
 def prepare_admin
